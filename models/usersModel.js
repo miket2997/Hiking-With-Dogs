@@ -1,16 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcrypt");
+
 
 const userModel = new Schema({
-    firstName: {
+    name: {
         type: String,
         required: true
     },
-    lastName: {
-        type: String,
-        required: true
-    },
-    userName: {
+    username: {
         type: String,
         unique: true,
         required: true
@@ -23,16 +21,33 @@ const userModel = new Schema({
     password: {
         type: String,
         required: true
-    },
-    birthDate: {
-        type: Date,
-        required: true
-    },
-    phoneNumber: {
-        type: String,
-        required: false
     }
 });
+
+
+userModel.pre("save", function(next){
+    const user = this;
+    if(!user.isModified("password")) return next()
+    bcrypt.hash(user.password, 10, (err, hash) => {
+        if(err) return next()
+        user.password = hash
+        next()
+    })
+});
+
+
+userModel.methods.checkPassword = function(passwordAttempt, callback){
+    bcrypt.compare(passwordAttempt, this.password, (err, isMatch) => {
+        if(err) return callback(err)
+        return callback(null, isMatch)
+    })
+};
+
+userModel.methods.withoutPassword = function(){
+    const user = this.toObject();
+    delete user.password
+    return user
+};
 
 
 

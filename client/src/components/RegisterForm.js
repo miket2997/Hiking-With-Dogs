@@ -5,13 +5,10 @@ import { useNavigate } from "react-router-dom";
 export default function RegisterForm(){
     const navigate = useNavigate();
     const initInputs = {
-        firstName: "",
-        lastName: "",
+        name: "",
         userName: "",
         email: "",
-        password: "",
-        birthDate: "",
-        phoneNumber: ""
+        password: ""
     };
 
     const [registerInputs, setRegisterInputs] = useState(initInputs);
@@ -50,18 +47,10 @@ export default function RegisterForm(){
                 <label style={{fontWeight: "bold"}}>Please fill out all of the required fields.</label>
                 <input 
                     type="text"
-                    name="firstName"
-                    value={registerInputs.firstName}
+                    name="name"
+                    value={registerInputs.name}
                     onChange={handleChange}
-                    placeholder="First Name"
-                    required={true}
-                />
-                <input 
-                    type="text"
-                    name="lastName"
-                    value={registerInputs.lastName}
-                    onChange={handleChange}
-                    placeholder="Last Name"
+                    placeholder="Name"
                     required={true}
                 />
                 <input 
@@ -87,22 +76,6 @@ export default function RegisterForm(){
                     onChange={handleChange}
                     placeholder="password"
                     required={true}
-                />
-                <input 
-                    type="date"
-                    name="birthDate"
-                    value={registerInputs.birthDate}
-                    onChange={handleChange}
-                    required={true}
-                    className="birthday--input"
-                />
-                <input 
-                    type="tel"
-                    name="phoneNumber"
-                    value={registerInputs.phoneNumber}
-                    onChange={handleChange}
-                    placeholder="Phone(optional)"
-                    required={false}
                 />
                 <button className="register--btn">Register</button>
             </form>
