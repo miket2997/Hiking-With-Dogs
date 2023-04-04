@@ -11,8 +11,8 @@ app.use(morgan('dev'));
 
 
 
-app.use("/api/trails", require("./routes/trailsRouter.js"));
-app.use("/api/reviews", require("./routes/reviewsRouter.js"))
+app.use("/trails", require("./routes/trailsRouter.js"));
+app.use("/reviews", require("./routes/reviewsRouter.js"));
 app.use("/auth", require("./routes/authRouter.js"))
 
 

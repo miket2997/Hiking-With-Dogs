@@ -22,7 +22,11 @@ const userModel = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    reviews: [{
+        type: Schema.Types.ObjectId,
+        ref: "Reviews"
+    }]
 });
 
 
