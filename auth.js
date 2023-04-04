@@ -7,8 +7,7 @@ function generateAuthToken(user){
     const payload = {
         user: {
             id: user._id,
-            email: user.email,
-            password: user.password
+            username: user.username
         },
     };
     const token = jwt.sign(payload, secretKey);

@@ -12,20 +12,21 @@ usersRouter.post("/signup", (req, res, next) => {
             res.status(403)
             return next(new Error("Username is already taken"))
         }
+        const newUser = new Users(req.body);
+        newUser.save()
+        .then(savedUser => {
+            const token = generateAuthToken(savedUser.withoutPassword());
+            return res.status(201).send({ token, user: savedUser.withoutPassword() })
+        })
+        .catch(err => {
+            res.status(500)
+            return next(err)
+        })
     })
     .catch(err => {
         res.status(500)
         return next(err)
-    })
-    const newUser = new Users(req.body);
-    newUser.save((err, savedUser) => {
-        if(err){
-            res.status(500)
-            return next(err)
-        }
-        const token = generateAuthToken(savedUser)                                                                                       
-        return res.status(201).send({ token, user: savedUser.withoutPassword()})
-    })                  
+    })           
 })          
 
 
@@ -61,55 +62,55 @@ usersRouter.post("/login", (req, res, next) => {
 
 
 
-usersRouter.get("/", (req, res, next) => {
-    Users.find((err, users) => {
-        if(err){
-            res.status(500)
-            return next(err)
-        }
-        return res.status(200).send(users)
-    })
-})
+// usersRouter.get("/", (req, res, next) => {
+//     Users.find((err, users) => {
+//         if(err){
+//             res.status(500)
+//             return next(err)
+//         }
+//         return res.status(200).send(users)
+//     })
+// })
 
                                                                            
 
                   
-usersRouter.get("/:userId", (req, res, next) => {
-    Users.findById({_id : req.params.userId}, (err, user) => {
-        if(err){
-            res.status(500)
-            return next(err)
-        }
-        return res.status(200).send(user)
-    })
-})                                                                            
+// usersRouter.get("/:userId", (req, res, next) => {
+//     Users.findById({_id : req.params.userId}, (err, user) => {
+//         if(err){
+//             res.status(500)
+//             return next(err)
+//         }
+//         return res.status(200).send(user)
+//     })
+// })                                                                            
 
 
-usersRouter.delete("/:userId", (req, res, next) => {
-    Users.findOneAndDelete({_id: req.params.userId}, (err, deletedUser) => {
-        if(err){
-            res.status(500)
-            return next(err)
-        }
-        return res.status(200).send(`Successfully deleted ${deletedUser.firstName} ${deletedUser.lastName}`)
-    })
-})
+// usersRouter.delete("/:userId", (req, res, next) => {
+//     Users.findOneAndDelete({_id: req.params.userId}, (err, deletedUser) => {
+//         if(err){
+//             res.status(500)
+//             return next(err)
+//         }
+//         return res.status(200).send(`Successfully deleted ${deletedUser.firstName} ${deletedUser.lastName}`)
+//     })
+// })
 
 
-usersRouter.put("/:userId", (req, res, next) => {
-    Users.findOneAndUpdate(
-        {_id: req.params.userId},
-        req.body,
-        {new: true},
-        (err, updatedUser) => {
-            if(err){
-                res.status(500)
-                return next(err)
-            }
-            return res.status(201).send(updatedUser)
-        }
-    )
-});
+// usersRouter.put("/:userId", (req, res, next) => {
+//     Users.findOneAndUpdate(
+//         {_id: req.params.userId},
+//         req.body,
+//         {new: true},
+//         (err, updatedUser) => {
+//             if(err){
+//                 res.status(500)
+//                 return next(err)
+//             }
+//             return res.status(201).send(updatedUser)
+//         }
+//     )
+// });
 
 
 module.exports = usersRouter

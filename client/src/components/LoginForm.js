@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom"
+
 
 
 export default function LogInForm(props){
 
     const initInput = {
-        email: "",
+        username: "",
         password: ""
     };
 
     const [loginInputs, setLoginInputs] = useState(initInput);
+
     const navigate = useNavigate();
 
     function handleRegister(){
@@ -27,24 +28,14 @@ export default function LogInForm(props){
             ...prevInputs,
             [name]: value
         }))
-    }
+    };
+
+   
 
     function handleSubmit(event){
         event.preventDefault()
-        const {email, password} = loginInputs;
-        axios.post("/api/users/login", { email, password })
-        .then(res => {
-            localStorage.setItem("token", res.data.token);
-            localStorage.setItem("user", JSON.stringify(res.data.user));
-            props.setIsLoggedIn(true)
-            axios.get(`/api/users/${res.data.user._id}`, {
-                headers: {Authorization: `Bearer ${res.data.token}`},
-            }).then(res => {
-                console.log(res.data)
-            })
-            navigate(-1)
-        })
-        .catch(err => console.log(err))
+        props.login(loginInputs)
+        navigate("/trailList")
     };
 
 
@@ -56,11 +47,11 @@ export default function LogInForm(props){
                 <h1>Sign In</h1>
                 <input 
                     className="login--inputs"
-                    type="email"
-                    name="email"
+                    type="text"
+                    name="username"
                     value={loginInputs.email}
                     onChange={handleChange}
-                    placeholder="email"
+                    placeholder="username"
                 />
                 <input 
                     className="login--inputs"

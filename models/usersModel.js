@@ -11,7 +11,8 @@ const userModel = new Schema({
     username: {
         type: String,
         unique: true,
-        required: true
+        required: true,
+        minlength: 1
     },
     email: {
         type: String,

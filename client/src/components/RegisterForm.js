@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-export default function RegisterForm(){
-    const navigate = useNavigate();
+
+export default function RegisterForm(props){
+
     const initInputs = {
         name: "",
-        userName: "",
+        username: "",
         email: "",
         password: ""
     };
 
     const [registerInputs, setRegisterInputs] = useState(initInputs);
-    const [users, setUsers] = useState([]);
+
 
     function handleChange(event){
         const {name, value} = event.target;
@@ -20,25 +19,15 @@ export default function RegisterForm(){
             ...prevInputs,
             [name]: value
         }))
-    }
+    };
 
+    
 
     function handleSubmit(event){
         event.preventDefault()
-        axios.post("/api/users", registerInputs)
-        .then(res => {
-            setUsers(prevUsers => [
-                ...prevUsers,
-                res.data
-            ])
-            setRegisterInputs(initInputs);
-            navigate("/")
-            alert("Thank you for signing up. You can now sign in to your account.")
-        })
-        .catch(err => console.log(err))
-        console.log(users)
-        
-    }
+        props.signup(registerInputs)
+        setRegisterInputs(initInputs)
+    };
 
     return (
         <div className="reg--form--container">
@@ -55,8 +44,8 @@ export default function RegisterForm(){
                 />
                 <input 
                     type="text"
-                    name="userName"
-                    value={registerInputs.userName}
+                    name="username"
+                    value={registerInputs.username}
                     onChange={handleChange}
                     placeholder="username"
                     required={true}
