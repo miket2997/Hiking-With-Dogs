@@ -9,7 +9,7 @@ export default function TrailList({ isLoggedIn }){
     const [addTrail, setAddTrail] = useState(false);
 
     function getTrails(){
-        axios.get("/api/trails")
+        axios.get("/trails")
         .then(res => setTrails(res.data))
         .catch(err => console.log(err))
     };

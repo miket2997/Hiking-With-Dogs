@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
+
 
 export default function ReviewForm(props){
+
     const [reviewInputs, setReviewInputs] = useState({rating: "", text: ""});
     
     function handleReviewChange(event){
@@ -10,20 +11,18 @@ export default function ReviewForm(props){
             ...prevInputs,
             [name]: value
         }))
-        //console.log("changing")
     }
-
+ 
     function handleReviewSubmit(event){
         event.preventDefault()
-        axios.post(`/api/reviews/${props.trailId}`, reviewInputs)
-            .then(res => {
-                props.getReviews(res.data)
-                props.handleReview()
-                setReviewInputs({rating: "", text: ""});
-            })
-            .catch(err => console.log(err))
-    }
-
+        props.addReview(reviewInputs, props.getReviews)
+        setReviewInputs({
+            rating: "",
+            text: ""
+        })
+       
+    };
+    
     return (
         <form onSubmit={handleReviewSubmit} className="add--review--form">
             <label className="review--label">Add Review</label>

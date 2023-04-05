@@ -380,6 +380,18 @@ button.logout {
   font-size: 1.1rem;
 }
 
+.delete--btn {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 20px;
+  cursor: pointer;
+}
+
+.delete--btn:hover {
+  background-color: rgb(142, 0, 0);
+}
 
 .add--review--form {
   display: flex;

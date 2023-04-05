@@ -21,19 +21,16 @@ export default function TrailForm(props){
             ...prevInputs,
             [name]: value
         }))
-        console.log("changing")
     }
 
 
     function handleTrailSubmit(event){
         event.preventDefault()
-        axios.post("/api/trails", trailInputs)
+        axios.post("/trails", trailInputs)
         .then(res => {
             setNewTrails(prevTrails => [...prevTrails, res.data])
             props.getTrails()
             setTrailInputs(initInputs)
-            console.log(newTrails)
-            
         })
         .catch(err => console.log(err))
     }

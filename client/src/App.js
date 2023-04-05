@@ -33,6 +33,7 @@ function App() {
   const initState = {
     user: JSON.parse(localStorage.getItem("user")) || {},
     token: localStorage.getItem("token") || "",
+    reviews: [],
     errMsg: ""
   };
 
@@ -71,13 +72,37 @@ function App() {
         setIsLoggedIn(true)
     })
     .catch(err => console.log(err))
-}
+};
 
   function logout(){
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     alert("You are now logged out.")
   };
+
+  function addReview(trailId, newReview, callback){
+    userAxios.post(`/reviews/${trailId}`, newReview)
+    .then(res => {
+      setUserState(prev => ({
+        ...prev,
+        reviews: [...prev.reviews, res.data]
+      }))
+      callback()
+    })
+    .catch(err => console.log(err))
+  };
+
+  function deleteReview(reviewId, callback){
+    userAxios.delete(`/reviews/${reviewId}`)
+    .then(() => {
+      setUserState(prev => ({
+        ...prev,
+        reviews: prev.reviews.filter(review => review._id !== reviewId)
+      }))
+      callback()
+    })
+    .catch(err => console.log(err.response.data.errMsg))
+  }
 
 
   return (
@@ -86,8 +111,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
         <Route path="/trailList" element={<TrailList isLoggedIn={isLoggedIn} />} />
-        <Route path="/trailCard/:trailId" element={<TrailCard isLoggedIn={isLoggedIn} />} />
-        <Route path="/trailCard/:trailId/:reviewId" element={<TrailCard />} />
+        <Route path="/trailCard/:trailId" element={<TrailCard isLoggedIn={isLoggedIn} addReview={addReview} deleteReview={deleteReview} />} />
         <Route path="/registerForm" element={<RegisterForm signup={signup} isLoggedIn={isLoggedIn} />} />
         <Route path="/login" element={<LogInForm setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} login={login} />}/>
         <Route path="/dashboard" element={<Dashboard isLoggedIn={isLoggedIn} logout={logout} />} />

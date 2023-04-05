@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import ReviewForm from "./ReviewForm";
 
-export default function TrailCard({ isLoggedIn }) {
+export default function TrailCard({ isLoggedIn, addReview, deleteReview }) {
   const { trailId } = useParams();
   const [trail, setTrail] = useState({});
   const [review, setReview] = useState(false);
@@ -18,16 +18,15 @@ export default function TrailCard({ isLoggedIn }) {
 
   useEffect(() => {
     axios
-      .get(`/api/trails/${trailId}`)
+      .get(`/trails/${trailId}`)
       .then((res) => setTrail(res.data))
       .catch((err) => console.log(err));
   }, [trailId]);
 
   const getReviews = useCallback(() => {
-    axios
-      .get(`/api/trails/${trailId}/reviews`)
+    axios.get(`/trails/${trailId}/reviews`)
       .then((res) => setReviewList(res.data.reviews))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.response.data.errMsg));
   }, [trailId]);
 
   function handleReview() {
@@ -37,6 +36,10 @@ export default function TrailCard({ isLoggedIn }) {
   useEffect(() => {
     getReviews();
   }, [getReviews]);
+
+  function handleDeleteReview(reviewId){
+    deleteReview(reviewId, getReviews)
+  }
 
   return (
     <div className="trail--card">
@@ -54,12 +57,13 @@ export default function TrailCard({ isLoggedIn }) {
         </button>
       )}
       {!review && !isLoggedIn && <button className="review--login--btn" onClick={navigateLogin}>Click here to login in order to add a review.</button>}
-      {review && <ReviewForm trailId={trailId} handleReview={handleReview} getReviews={getReviews} />}
+      {review && <ReviewForm trailId={trailId} handleReview={handleReview} addReview={(newReview, callback) => addReview(trailId, newReview, callback)} getReviews={getReviews} />}
       <h1 className="reviews--h1">Reviews</h1>
       {reviewList.map((review) => (
         <div key={review._id} className="review--container">
           <p>Rating: {review.rating}/5</p>
           <p>{review.text}</p>
+          <button className="delete--btn" onClick={() => handleDeleteReview(review._id)}>Delete review</button>
         </div>
       ))}
     </div>

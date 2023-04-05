@@ -35,7 +35,7 @@ export default function LogInForm(props){
     function handleSubmit(event){
         event.preventDefault()
         props.login(loginInputs)
-        navigate("/trailList")
+        navigate(-1)
     };
 
 
