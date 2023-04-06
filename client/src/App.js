@@ -111,7 +111,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
         <Route path="/trailList" element={<TrailList isLoggedIn={isLoggedIn} />} />
-        <Route path="/trailCard/:trailId" element={<TrailCard isLoggedIn={isLoggedIn} addReview={addReview} deleteReview={deleteReview} />} />
+        <Route path="/trailCard/:trailId" element={<TrailCard isLoggedIn={isLoggedIn} addReview={addReview} deleteReview={deleteReview} {...userState} />} />
         <Route path="/registerForm" element={<RegisterForm signup={signup} isLoggedIn={isLoggedIn} />} />
         <Route path="/login" element={<LogInForm setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} login={login} />}/>
         <Route path="/dashboard" element={<Dashboard isLoggedIn={isLoggedIn} logout={logout} />} />

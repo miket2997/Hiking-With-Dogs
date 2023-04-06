@@ -5,11 +5,6 @@ export default function Dashboard({ isLoggedIn, logout }){
     const user = JSON.parse(localStorage.getItem("user"));
     const navigate = useNavigate();
 
-    const localDate = new Date(user.birthDate).toLocaleDateString("en-us", {
-        month: "long",
-        day: "numeric",
-        year: "numeric"
-    });
 
     function handleLogout(){
         logout();
@@ -24,14 +19,14 @@ export default function Dashboard({ isLoggedIn, logout }){
                     <h1>My Dashboard</h1>
                     <label>Your Information</label>
                     <ul>
-                        <li>Name: {user.firstName} {user.lastName}</li>
-                        <li>Username: {user.userName}</li>
+                        <li>Name: {user.name}</li>
+                        <li>Username: {user.username}</li>
                         <li>Email: {user.email}</li>
-                        <li>Birthday: { localDate }</li>
-                        {user.phoneNumber && <li>Phone Number: {user.phoneNumber}</li> }
                     </ul>
                     <h4>Click below to log out.</h4>
                     <button className="logout--btn" onClick={handleLogout}>Logout</button>
+                    <br />
+                    <button className="dashboard--btn" onClick={() => navigate("/trailList")}>See a list of trails</button>
                 </div>
             )}
         </div>

@@ -12,6 +12,7 @@ export default function TrailForm(props){
     }
 
     const [trailInputs, setTrailInputs] = useState(initInputs);
+    // eslint-disable-next-line
     const [newTrails, setNewTrails] = useState([]);
 
 
@@ -22,7 +23,7 @@ export default function TrailForm(props){
             [name]: value
         }))
     }
-
+  
 
     function handleTrailSubmit(event){
         event.preventDefault()

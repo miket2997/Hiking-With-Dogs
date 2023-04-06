@@ -445,6 +445,18 @@ button.logout {
   align-items: center;
 }
 
+.dashboard--btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: blue;
+  font-weight: bold;
+}
+
+.dashboard--btn:hover {
+  text-decoration: underline;
+}
+
 .user--info {
   background-color: white;
   margin-top: 30px;
@@ -613,8 +625,7 @@ button.logout {
 
 @media screen and (max-width: 500px){
   .footer {
-    flex-direction: column;
-    align-items: center;
+    font-size: small;
   }
 }
 

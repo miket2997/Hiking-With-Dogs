@@ -43,7 +43,13 @@ trailsRouter.get("/:trailId/reviews", (req, res, next) => {
         }
         return res.status(200).send(reviews)
     })
-    .populate('reviews')
+    .populate({
+        path: "reviews",
+        populate: {
+            path: "user",
+            select: "username"
+        }
+    })
 })
 
 

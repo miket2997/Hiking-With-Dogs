@@ -16,6 +16,7 @@ export default function ReviewForm(props){
     function handleReviewSubmit(event){
         event.preventDefault()
         props.addReview(reviewInputs, props.getReviews)
+        props.handleReview()
         setReviewInputs({
             rating: "",
             text: ""

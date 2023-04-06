@@ -24,7 +24,8 @@ const trailSchema = new Schema({
         required: true
     },
     image: {
-        type: String
+        type: String,
+        required: true
     },
     reviews: [{
         type: Schema.Types.ObjectId,

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import ReviewForm from "./ReviewForm";
 
-export default function TrailCard({ isLoggedIn, addReview, deleteReview }) {
+export default function TrailCard({ isLoggedIn, addReview, deleteReview, user }) {
   const { trailId } = useParams();
   const [trail, setTrail] = useState({});
   const [review, setReview] = useState(false);
@@ -15,10 +15,8 @@ export default function TrailCard({ isLoggedIn, addReview, deleteReview }) {
     navigate("/login")
   }
 
-
   useEffect(() => {
-    axios
-      .get(`/trails/${trailId}`)
+    axios.get(`/trails/${trailId}`)
       .then((res) => setTrail(res.data))
       .catch((err) => console.log(err));
   }, [trailId]);
@@ -61,9 +59,10 @@ export default function TrailCard({ isLoggedIn, addReview, deleteReview }) {
       <h1 className="reviews--h1">Reviews</h1>
       {reviewList.map((review) => (
         <div key={review._id} className="review--container">
+          <small> By: {review.user.username}</small>
           <p>Rating: {review.rating}/5</p>
           <p>{review.text}</p>
-          <button className="delete--btn" onClick={() => handleDeleteReview(review._id)}>Delete review</button>
+          { user._id === review.user._id && isLoggedIn && <button className="delete--btn" onClick={() => handleDeleteReview(review._id)}>Delete review</button>}
         </div>
       ))}
     </div>
