@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/static/css/main.27fa4a30.css",
+    "main.js": "/static/js/main.ee897463.js",
+    "static/media/trent6.JPG": "/static/media/trent6.a5118212de94e6597583.JPG",
+    "static/media/trent8.JPG": "/static/media/trent8.6b19c9197f873931ef8e.JPG",
+    "static/media/trent7.JPG": "/static/media/trent7.1f484d3825e34f68dd85.JPG",
+    "static/media/trent2.JPG": "/static/media/trent2.a8213c155015af6c10cf.JPG",
+    "static/media/trent1.JPG": "/static/media/trent1.2c945c278b8d154795e8.JPG",
+    "static/media/trent16.JPG": "/static/media/trent16.6185f3b36f5f1767ebdd.JPG",
+    "static/media/trent10.JPG": "/static/media/trent10.3cdc76179fbdce7b9b8b.JPG",
+    "static/media/trent11.JPG": "/static/media/trent11.b540c967271232b5131b.JPG",
+    "static/media/trent14.JPG": "/static/media/trent14.1f57c4bfff22a02dee23.JPG",
+    "static/media/trent4.JPG": "/static/media/trent4.0148bc9bf16c473e5cc3.JPG",
+    "static/media/trent13.JPG": "/static/media/trent13.5bc73e0daaa23dffd56f.JPG",
+    "static/media/trent17.JPG": "/static/media/trent17.c007fc5563072fe8f1a0.JPG",
+    "static/media/trent12.JPG": "/static/media/trent12.d7200c52997c0849c5e3.JPG",
+    "static/media/trent18.JPG": "/static/media/trent18.3c829451a8f5b0522c83.JPG",
+    "static/media/trent19.JPG": "/static/media/trent19.50c8e6a55f83622be7ee.JPG",
+    "static/media/trent3.JPG": "/static/media/trent3.231ea438f79ac6fffc3b.JPG",
+    "static/media/trent15.JPG": "/static/media/trent15.73d52ef8d937abae501d.JPG",
+    "static/media/trent9.JPG": "/static/media/trent9.815cc1dc9b03fc8c8e0f.JPG",
+    "static/media/trent5.JPG": "/static/media/trent5.a57527b68d8b9d65ebeb.JPG",
+    "index.html": "/index.html",
+    "main.27fa4a30.css.map": "/static/css/main.27fa4a30.css.map",
+    "main.ee897463.js.map": "/static/js/main.ee897463.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.27fa4a30.css",
+    "static/js/main.ee897463.js"
+  ]
+}
