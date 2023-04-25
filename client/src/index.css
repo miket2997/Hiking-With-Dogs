@@ -627,6 +627,24 @@ button.logout {
   .footer {
     font-size: small;
   }
+
+  .register--h1 {
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+
+  .reg--form--container {
+    height: auto;
+  }
+
+  .registration--form {
+    width: auto;
+    height: auto;
+  }
+
+  .login--form {
+    height: auto;
+  }
 }
 
 .logout {
