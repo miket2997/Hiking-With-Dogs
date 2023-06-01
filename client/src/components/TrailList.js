@@ -9,7 +9,7 @@ export default function TrailList({ isLoggedIn }){
     const [addTrail, setAddTrail] = useState(false);
 
     function getTrails(){
-        axios.get("/trails")
+        axios.get("https://hikingwithdogs.netlify.app/trails")
         .then(res => setTrails(res.data))
         .catch(err => console.log(err))
     };
