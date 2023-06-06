@@ -4,11 +4,12 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const path = require("path");
-
+const cors = require("cors");
 
 
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(cors());
 app.use(express.static(path.join(__dirname, "client", "build")))
 
 
