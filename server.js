@@ -31,6 +31,6 @@ app.get("*", (req, res) => {
 })
 
 app.listen(5001, () => {
-    console.log("App is running on port 5000")
+    console.log("App is running on port 5001")
 })
 
